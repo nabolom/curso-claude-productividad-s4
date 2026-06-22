@@ -5,6 +5,9 @@ Construye un agente que **ejecuta, se verifica, recuerda y se dispara solo**, or
 
 > El `estado.json` local de antes evoluciona a una **base de datos en la nube**. Tu agente deja de vivir en tu laptop.
 
+
+> ### 👉 ¿Eres principiante? **Empieza por [EMPIEZA_AQUI.md](EMPIEZA_AQUI.md)** — una guía paso a paso sin tecnicismos.
+
 ---
 
 ## Los 4 Loops
