@@ -1,0 +1,20 @@
+Este archivo es un recordatorio, no un dato.
+
+El guion (lámina 15 y notas de la lámina 15 del facilitador) ofrece DOS narrativas posibles
+para la demo de Cowork. Elige una ANTES de la sesión:
+
+NARRATIVA A — "la primera corrida crea el estado" (lo que dice la nota del guion):
+  - Borra o renombra estado.json ANTES de la demo.
+  - Cuando corras la instrucción, el agente no encontrará el archivo y lo creará desde cero.
+  - Mensaje al grupo: "la primera vez no hay memoria, el agente la crea".
+  - Si tienes tiempo, corre una SEGUNDA vez para mostrar que ahora SÍ lee lo que escribió.
+
+NARRATIVA B — "el sistema ya tiene memoria de la semana pasada" (más impactante en 1 sola corrida):
+  - Deja estado.json en su lugar (con Grupo Meridian ya contactado el 16-jun).
+  - Cuando corras la instrucción, el agente leerá el estado y dirá explícitamente
+    "Grupo Meridian ya fue contactado, me enfoco en cuentas nuevas".
+  - Esto demuestra memoria en UNA sola corrida, sin necesidad de correr dos veces.
+
+RECOMENDACIÓN: usa la Narrativa B para una audiencia que ve la demo una sola vez —
+el efecto "ya sé qué hice la semana pasada" es más claro y no depende de correr dos veces.
+Guarda una copia de estado.json antes de la sesión para poder resetear entre ensayos.

@@ -1,0 +1,44 @@
+──────────────────────────────────────────────────────────────────────
+DEMO EN VIVO · OPENROUTER — Loop 2: Verification
+node verification_loop_demo.js
+──────────────────────────────────────────────────────────────────────
+Reseña recibida:
+"Pedí mi envío hace 9 días y todavía no llega. Nadie me responde en soporte. Pésimo servicio, no vuelvo a comprar aquí." — ★☆☆☆☆ en Google Reviews
+──────────────────────────────────────────────────────────────────────
+[WORKER → anthropic/claude-sonnet-4.5]
+Generando respuesta a la reseña negativa...
+✓ Respuesta generada  (105 tokens, $0.00222)
+  «Lamentamos profundamente esta situación. 9 días sin respuesta es inaceptable. Por favor, envíanos tu número de rastreo por WhatsApp al +52 55 1234 5678 o correo a urgencias@northpeak.com con asunto "PRIORIDAD GOOGLE". Un supervisor revisará tu caso hoy mismo y te contactará en las próximas 2 horas para resolver esto.»
+[GRADER · CHECK DETERMINISTA]  (sin tokens, sin costo)
+✗ FALLA — usa frase prohibida: "lamentamos profundamente"
+  ↳ feedback específico regresa al worker.
+
+[WORKER → anthropic/claude-sonnet-4.5]  (intento 2, con feedback)
+Regenerando con la retroalimentación del grader...
+✓ Respuesta generada  (88 tokens, $0.00217)
+  «Entendemos tu frustración por la demora y la falta de respuesta. Este retraso no es aceptable. Por favor, envíanos tu número de guía por mensaje directo aquí en Google o escríbenos a WhatsApp +52 [número] para rastrear tu paquete de inmediato y darte una solución hoy mismo.»
+[GRADER · CHECK DETERMINISTA]  (sin tokens, sin costo)
+→  ✓ pasa
+[GRADER → anthropic/claude-3-haiku]
+→  ✓ APRUEBA  (278 tokens, $0.00013)
+──────────────────────────────────────────────────────────────────────
+RESPUESTA APROBADA — lista para publicar:
+
+Entendemos tu frustración por la demora y la falta de respuesta. Este retraso no es aceptable. Por favor, envíanos tu número de guía por mensaje directo aquí en Google o escríbenos a WhatsApp +52 [número] para rastrear tu paquete de inmediato y darte una solución hoy mismo.
+
+──────────────────────────────────────────────────────────────────────
+RESULTADO REAL · La tabla de costos — con dinero real
+
+etapa                             modelo                    tokens       costo
+──────────────────────────────────────────────────────────────────────
+Worker · intento 1                claude-sonnet-4.5            319    $0.00222
+Grader determinista · intento 1   código                         0    $0.00000
+Worker · intento 2                claude-sonnet-4.5            370    $0.00217
+Grader determinista · intento 2   código                         0    $0.00000
+Grader Haiku · intento 2          claude-3-haiku               278    $0.00013
+──────────────────────────────────────────────────────────────────────
+TOTAL (con routing inteligente)                                       $0.00451
+Si todo —incluida verificación— usara el modelo caro:                 $0.00895
+Ahorro con routing por tarea:                                              50%
+──────────────────────────────────────────────────────────────────────
+Datos de una corrida real. Los números varían ligeramente cada vez que corre.

@@ -1,0 +1,89 @@
+{
+  "name": "Hackathon S4 - Agente Reactivacion (Loop 4 Trigger)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reactivacion",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "b1a1f000-0000-4000-8000-000000000001",
+      "name": "Webhook (Trigger)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "webhookId": "hackathon-s4-reactivacion"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/cuentas?estatus_agente=eq.pendiente&select=*&order=ultimo_contacto.asc",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{ $env.SUPABASE_KEY }}" },
+            { "name": "Authorization", "value": "=Bearer {{ $env.SUPABASE_KEY }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b1a1f000-0000-4000-8000-000000000002",
+      "name": "Supabase: leer cartera (Loop 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.OPENROUTER_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"anthropic/claude-sonnet-4.5\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Ejecutivo de cuenta. Mensaje de reactivacion breve (max 90 palabras), calido, personalizado, con siguiente paso. Solo el cuerpo.\"},\n    {\"role\": \"user\", \"content\": \"Empresa: {{ $json.empresa }}, Contacto: {{ $json.contacto }}, Etapa: {{ $json.etapa }}. Redacta el mensaje.\"}\n  ]\n}",
+        "options": {}
+      },
+      "id": "b1a1f000-0000-4000-8000-000000000003",
+      "name": "Claude redacta (Loop 1)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/cuentas?id=eq.{{ $('Supabase: leer cartera (Loop 3)').item.json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{ $env.SUPABASE_KEY }}" },
+            { "name": "Authorization", "value": "=Bearer {{ $env.SUPABASE_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"mensaje_generado\": \"{{ $json.choices[0].message.content }}\",\n  \"estatus_agente\": \"contactado\"\n}",
+        "options": {}
+      },
+      "id": "b1a1f000-0000-4000-8000-000000000004",
+      "name": "Supabase: guardar resultado (Loop 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [920, 300]
+    }
+  ],
+  "connections": {
+    "Webhook (Trigger)": { "main": [[{ "node": "Supabase: leer cartera (Loop 3)", "type": "main", "index": 0 }]] },
+    "Supabase: leer cartera (Loop 3)": { "main": [[{ "node": "Claude redacta (Loop 1)", "type": "main", "index": 0 }]] },
+    "Claude redacta (Loop 1)": { "main": [[{ "node": "Supabase: guardar resultado (Loop 3)", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

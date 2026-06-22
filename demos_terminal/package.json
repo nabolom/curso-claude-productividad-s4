@@ -1,0 +1,14 @@
+{
+  "name": "s4-demos-claude-productividad",
+  "version": "1.0.0",
+  "description": "Demos en vivo de la Sesión 4 — Loop 2 (verification) y assets para Loop 3 (Cowork)",
+  "type": "commonjs",
+  "scripts": {
+    "demo": "node verification_loop_demo.js",
+    "verification": "node verification_loop_demo.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true
+}

@@ -1,0 +1,28 @@
+{
+  "_comentario": "Archivo de estado del CoO de reactivación de cuentas. El agente lo lee al inicio y lo actualiza al final de cada ejecución. Este es el estado SEMILLA que simula 'la semana pasada' para que la demo muestre memoria desde la primera corrida.",
+  "ultima_ejecucion": "2025-06-16T08:00:00-06:00",
+  "umbral_dias_sin_contacto": 30,
+  "cuentas_contactadas": [
+    {
+      "cuenta": "Grupo Meridian",
+      "fecha_contacto": "2025-06-16",
+      "canal": "email de reactivación",
+      "resultado": "respondió — pidió revisar términos de pago"
+    }
+  ],
+  "pendientes": [
+    {
+      "cuenta": "Kora Health",
+      "motivo": "esperando aprobación de su dirección médica",
+      "proxima_accion": "dar seguimiento si no responde antes del 23-jun"
+    }
+  ],
+  "no_recontactar": [
+    "Altavista Retail",
+    "Brisa Alimentos"
+  ],
+  "metricas": {
+    "cuentas_reactivadas_acumulado": 1,
+    "emails_enviados_ultima_corrida": 1
+  }
+}
