@@ -3,6 +3,8 @@
 ### Hackathon Sesión 4 · "El Agente Autónomo"
 
 > **Lee esto primero.** Esta guía asume que **nunca** has usado una terminal ni una API. Vamos pasito a pasito. Si algo no entiendes, levanta la mano: estás aquí para aprender, no para sufrir.
+>
+> ✅ **Ruta recomendada para el reto (sin costo):** construye tu agente con **Claude Cowork como cerebro** siguiendo **[GUIA_ALUMNO_COWORK.md](GUIA_ALUMNO_COWORK.md)**. Esta guía (`EMPIEZA_AQUI.md`) explica la versión **en código/terminal**, útil si quieres profundizar o hacer el bonus de OpenRouter.
 
 ---
 

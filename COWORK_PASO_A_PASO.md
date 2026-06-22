@@ -2,6 +2,9 @@
 
 ### Hackathon S4 · "El Agente Autónomo" · Guía paso a paso para Cowork
 
+> ⚠️ **¿Eres alumno y quieres la ruta SIN COSTO (Cowork como cerebro)?** Usa la guía oficial **[GUIA_ALUMNO_COWORK.md](GUIA_ALUMNO_COWORK.md)**.
+> Esta guía es la **versión en código (avanzada)**, donde el agente es un programa que llama a APIs externas. Úsala solo para el bonus de OpenRouter o si quieres profundizar.
+
 > Esta guía es para que construyas tu agente **usando Claude Cowork como tu copiloto**. No necesitas ser programador: Cowork escribe y corre el código por ti. Tú lo diriges.
 >
 > **Modelo de trabajo:** cada quien usa **su propia base de datos** (tu propio proyecto de Supabase o el clon local). Así nadie pisa los datos de nadie y tu agente es 100% tuyo.

@@ -2,11 +2,11 @@
 
 ### Hackathon S4 · "El Agente Autónomo"
 
-> **Cómo usar esta guía:** vas a copiar los textos en **cajas grises** y pegarlos en **Cowork**, uno por uno. Cowork hace el código; tú lo diriges. Después de cada paso te digo qué **deberías ver ✅**.
+> **Cómo usar esta guía:** vas a copiar los textos en **cajas grises** y pegarlos en **Cowork**, uno por uno. Después de cada paso te digo qué **deberías ver ✅**.
 >
 > No necesitas saber programar. Necesitas saber **pedir bien**.
 >
-> **Empezamos desde cero:** crear tu base de datos, **iniciar tu proyecto en Claude Cowork** (`Start a Project`) y, ya dentro, construir el agente.
+> **La idea clave:** aquí **Cowork ES tu agente**. Claude lee, razona, redacta y se verifica él mismo — todo dentro de tu suscripción que ya pagas. **No necesitas tarjeta ni pagar APIs.** Lo único externo es **Supabase** (gratis), que le da *memoria en la nube*.
 
 ---
 
@@ -18,11 +18,13 @@
 
 ## 🎒 Lo que necesitas tener a la mano
 
-| | Qué | Dónde sacarlo |
-|---|---|---|
-| 🔑 | **Llave de OpenRouter** | [openrouter.ai](https://openrouter.ai) → *Keys* → *Create Key* |
-| 🗄️ | **Llave + URL de Supabase** | [supabase.com](https://supabase.com) → *New project* → *Settings* → *API* |
+| | Qué | ¿Cuesta? | Dónde sacarlo |
+|---|---|---|---|
+| 💻 | **Claude Cowork** (app de escritorio) | Ya lo pagas (Pro/Max/Team) | App de Claude Desktop |
+| 🗄️ | **Supabase** (URL + key) | **Gratis** | [supabase.com](https://supabase.com) → *New project* → *Settings* → *API* |
 
+> 🟢 **¿Notas qué falta?** No hay "llave de OpenRouter". No la necesitas: el cerebro es Cowork.
+>
 > ⏱️ Crear el proyecto de Supabase tarda ~2 min en ponerse "verde". Hazlo primero.
 
 ---
@@ -49,7 +51,7 @@
 4. Nómbralo **`Hackathon S4`**. Cuando te pida **carpeta**, crea/elige una carpeta vacía en tu compu (ej. `Documentos/Hackathon-S4`) — ahí vivirá tu agente.
 5. (Opcional pero recomendado) En **instrucciones del proyecto**, pega:
    ```text
-   Estoy en el Hackathon S4 del curso Claude para Productividad. Voy a construir un agente que orquesta APIs (OpenRouter + Supabase). Explícame cada paso en lenguaje simple antes de ejecutarlo y nunca subas mis API keys a GitHub.
+   Estoy en el Hackathon S4 del curso Claude para Productividad. Voy a construir un agente que TÚ (Cowork) operas: lees clientes de Supabase, redactas mensajes y te verificas a ti mismo. Explícame cada paso en lenguaje simple antes de ejecutarlo y nunca subas mis llaves a GitHub.
    ```
 6. Dentro del proyecto, haz clic en **New task** para empezar a trabajar.
 
@@ -72,21 +74,20 @@ Quiero trabajar en la carpeta "starters". Explícame en una frase qué hay en ca
 
 ---
 
-# PASO 4 · Dale tus llaves a Cowork
+# PASO 4 · Conecta tu memoria (Supabase)
 
 Copia esto y **reemplaza con TUS valores** 👇
 
 ```text
-Guarda estas credenciales como variables de entorno para esta sesión y NO las subas nunca a GitHub:
+Guarda estos dos datos de mi Supabase como variables de entorno para esta sesión y NUNCA los subas a GitHub:
 
-OPENROUTER_API_KEY = sk-or-...........(tu llave)
 SUPABASE_URL = https://.............supabase.co
-SUPABASE_KEY = eyJ............(tu service_role key)
+SUPABASE_KEY = eyJ............(mi service_role key)
 
-Confírmame que quedaron cargadas, sin mostrarlas completas.
+Confírmame que quedaron cargados, sin mostrarlos completos.
 ```
 
-> ✅ **Deberías ver:** Cowork confirma que las variables están listas (sin imprimir las llaves completas).
+> ✅ **Deberías ver:** Cowork confirma que los datos están listos. (Solo dos: no hay llave de OpenRouter.)
 
 ---
 
@@ -94,40 +95,41 @@ Confírmame que quedaron cargadas, sin mostrarlas completas.
 
 Copia **solo el bloque de tu carril** 👇
 
-### 🟢 Carril 1 — Fundamentos (si es tu primera vez con APIs)
+### 🟢 Carril 1 — Fundamentos (si es tu primera vez)
 
 ```text
-Abre starters/carril1_fundamentos/agente.js. Tiene 4 comentarios "// TODO".
-Complétalos conmigo UNO POR UNO, y antes de escribir cada uno explícame en lenguaje simple qué hace.
+Quiero que TÚ seas mi agente de reactivación. Trabaja paso a paso conmigo y explícame cada cosa en lenguaje simple:
 
-El agente debe:
-1) leer de Supabase las cuentas con estatus "pendiente",
-2) saltar las que llevan menos de 30 días sin contacto,
-3) generar un mensaje de reactivación con Claude para las demás,
-4) guardar el mensaje y marcar la cuenta como "contactado" en Supabase.
+1) Lee de mi Supabase (tabla "cuentas") las que tienen estatus "pendiente".
+2) Quédate solo con las que llevan MÁS de 30 días sin contacto; las recientes, sáltalas.
+3) Para cada una, REDACTA tú mismo un mensaje de reactivación cálido y personalizado (usa el nombre del contacto y la empresa).
+4) Guarda el mensaje en la columna "mensaje_generado" y cambia su estatus a "contactado".
+
+Muéstrame los mensajes antes de guardarlos.
 ```
 
-### 🟡 Carril 2 — Verificación (si ya conectaste una API antes)
+### 🟡 Carril 2 — Verificación (si quieres que el agente se controle a sí mismo)
 
 ```text
-Abre starters/carril2_verificacion/agente.js. Tiene 3 "// TODO".
-Quiero que, además de generar el mensaje, el agente SE VERIFIQUE solo:
-- primero un chequeo GRATIS con código (máximo de palabras + frases prohibidas como "lamentamos profundamente"),
-- si pasa, que un modelo barato (Claude Haiku) juzgue el tono,
-- si falla, que reintente usando el feedback.
-Guíame TODO por TODO y explícame por qué esto ahorra dinero.
+Igual que el Carril 1, pero ahora quiero que ANTES de guardar cada mensaje TE VERIFIQUES a ti mismo:
+
+- Regla 1 (gratis, mental): el mensaje no debe pasar de 90 palabras y NO debe contener frases acartonadas como "lamentamos profundamente" ni "estimado cliente".
+- Regla 2: revisa que el TONO sea cálido y humano, no robótico.
+- Si un mensaje falla cualquier regla, reescríbelo y vuelve a revisarlo (máximo 2 intentos).
+
+Cuando guardes en Supabase, marca "verificado = true" y escribe en "notas_verificacion" qué corregiste. Muéstrame el antes/después de los que reescribiste.
 ```
 
-### 🔴 Carril 3 — Autónomo (si quieres el sistema completo)
+### 🔴 Carril 3 — Autónomo (si quieres que se dispare solo)
 
 ```text
-Ya tengo mi agente del Carril 2 funcionando.
-Ahora quiero que se dispare SOLO, sin que yo lo ejecute a mano.
-Usa starters/carril3_autonomo/webhook.js para levantar un webhook local que ejecute mi agente al recibir un POST.
-Luego ayúdame a dispararlo con curl y a comprobar que funcionó.
+Ya tengo mi agente verificador funcionando.
+Ahora quiero que se ejecute SOLO, sin que yo lo lance a mano.
+Usa el comando /schedule de Cowork para programar que esta tarea corra automáticamente (ej. cada día a las 9am).
+Explícame la diferencia entre que YO lo dispare y que un horario lo dispare, y cómo registrar en la tabla "corridas" que esta corrida fue automática (disparador = "schedule").
 ```
 
-> ✅ **Deberías ver:** Cowork va completando el código y te explica cada parte. Pregúntale lo que no entiendas.
+> ✅ **Deberías ver:** Cowork razonando, redactando y (en carril 2+) corrigiéndose a sí mismo. Pregúntale lo que no entiendas.
 
 ---
 
@@ -136,7 +138,7 @@ Luego ayúdame a dispararlo con curl y a comprobar que funcionó.
 Copia esto en Cowork 👇
 
 ```text
-Ejecuta el agente y muéstrame la salida completa.
+Ejecuta el agente ahora y muéstrame todos los mensajes que generaste.
 Después dime exactamente qué filas cambiaron en mi tabla "cuentas" de Supabase y por qué.
 ```
 
@@ -151,11 +153,32 @@ Ahora abre tu **Supabase → Table Editor → cuentas** y refresca.
 Copia esto en Cowork 👇
 
 ```text
-Sube mi agente.js terminado a un repositorio NUEVO en mi cuenta de GitHub
-(hazlo público), y dame el link para entregarlo.
+Sube a un repositorio NUEVO y público en mi cuenta de GitHub:
+- el archivo/instrucciones de mi agente,
+- un README corto que explique qué hace y qué carril hice.
+Dame el link para entregarlo.
 ```
 
 > ✅ **Deberías ver:** un link tipo `github.com/tu-usuario/mi-agente-s4`. Ese es tu entregable.
+
+---
+
+## ⭐ BONUS (avanzado, opcional) — Abaratar a escala con OpenRouter
+
+> Solo si terminaste tu carril y quieres ir más lejos. **No es necesario** para aprobar el reto.
+
+Cuando un agente corre **miles** de veces al día, usar el modelo más potente para *todo* sale caro. La técnica pro es **enrutar**: usar un modelo barato para las tareas simples (como verificar) y el potente solo para lo difícil. Eso se hace con **OpenRouter** (una API que da acceso a muchos modelos).
+
+Si quieres probarlo, pégale esto a Cowork:
+
+```text
+Quiero entender el "model routing" para ahorrar costos a escala.
+Abre starters/carril2_verificacion/agente.js (la versión que usa OpenRouter).
+Explícame cómo el "worker" usa un modelo potente para redactar y el "grader" usa uno barato (Haiku) para verificar, y por qué eso baja el costo ~40-50% sin perder calidad.
+(Necesitaré una OPENROUTER_API_KEY para correrlo de verdad; si no la tengo, solo explícamelo con el código.)
+```
+
+> 💡 Este bonus es el puente hacia sistemas de producción reales. Es el "por qué" detrás del Loop 2 a gran escala.
 
 ---
 
@@ -164,9 +187,9 @@ Sube mi agente.js terminado a un repositorio NUEVO en mi cuenta de GitHub
 | Si ves... | Pégale a Cowork esto |
 |---|---|
 | Un error rojo | `Me salió este error: [pega el error completo]. ¿Qué significa y cómo lo arreglo?` |
-| `401` o `Unauthorized` | `Creo que mi API key está mal. Revisa que esté bien copiada, sin espacios ni saltos de línea.` |
-| `0 cuentas` / no pasa nada | `Muéstrame qué cuentas hay y cuántos días lleva cada una. Creo que el filtro de 30 días está mal.` |
 | No conecta a Supabase | `Verifica que SUPABASE_URL y SUPABASE_KEY estén bien cargadas y que la tabla "cuentas" exista.` |
+| `401` o `Unauthorized` | `Creo que mi llave de Supabase está mal. Revisa que sea la service_role y esté bien copiada, sin espacios.` |
+| `0 cuentas` / no pasa nada | `Muéstrame qué cuentas hay y cuántos días lleva cada una. Creo que el filtro de 30 días está mal.` |
 
 > 🎯 **La regla de oro del curso:** cuando te atores, **copia el error y pégaselo a tu agente**. Saber desatorarte así vale más que memorizar código.
 
@@ -185,9 +208,9 @@ para correr el agente otra vez desde limpio.
 
 ## 🏁 ¿Terminaste? Checklist
 
-- [ ] 🟢 Las 4 cuentas de +30 días quedaron en `contactado`.
-- [ ] 🟡 La columna `verificado` está en `true` (si hiciste Carril 2+).
-- [ ] 🔴 Disparaste el agente con un webhook, no a mano (Carril 3).
+- [ ] 🟢 Las 4 cuentas de +30 días quedaron en `contactado` con un mensaje escrito por Cowork.
+- [ ] 🟡 La columna `verificado` está en `true` y `notas_verificacion` muestra qué corrigió (Carril 2+).
+- [ ] 🔴 Programaste el agente con `/schedule` para que corra solo (Carril 3).
 - [ ] 📂 Subiste tu agente a GitHub y tienes el link.
 
-**¡Eso es Loop Engineering!** Tu agente ejecuta, se verifica, recuerda y se dispara solo. 🎉
+**¡Eso es Loop Engineering!** Tu agente **ejecuta, se verifica, recuerda y se dispara solo** — y todo lo orquestó Cowork. 🎉
