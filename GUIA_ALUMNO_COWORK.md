@@ -5,6 +5,8 @@
 > **Cómo usar esta guía:** vas a copiar los textos en **cajas grises** y pegarlos en **Cowork**, uno por uno. Cowork hace el código; tú lo diriges. Después de cada paso te digo qué **deberías ver ✅**.
 >
 > No necesitas saber programar. Necesitas saber **pedir bien**.
+>
+> **Empezamos desde cero:** crear tu base de datos, **iniciar tu proyecto en Claude Cowork** (`Start a Project`) y, ya dentro, construir el agente.
 
 ---
 
@@ -37,9 +39,27 @@
 
 ---
 
-# PASO 2 · Abre Cowork y trae el reto
+# PASO 2 · Inicia tu proyecto en Claude Cowork
 
-Copia esto en Cowork 👇
+> Cowork está en la **app de escritorio de Claude** (Mac o Windows), no en el navegador. Necesitas un plan de pago (Pro/Max/Team).
+
+1. Abre la **app de Claude Desktop**.
+2. Arriba, junto a "Chat", haz clic en la pestaña **Cowork**.
+3. En la barra izquierda, entra a **Projects** y haz clic en **+ → Start a Project** (empezar de cero).
+4. Nómbralo **`Hackathon S4`**. Cuando te pida **carpeta**, crea/elige una carpeta vacía en tu compu (ej. `Documentos/Hackathon-S4`) — ahí vivirá tu agente.
+5. (Opcional pero recomendado) En **instrucciones del proyecto**, pega:
+   ```text
+   Estoy en el Hackathon S4 del curso Claude para Productividad. Voy a construir un agente que orquesta APIs (OpenRouter + Supabase). Explícame cada paso en lenguaje simple antes de ejecutarlo y nunca subas mis API keys a GitHub.
+   ```
+6. Dentro del proyecto, haz clic en **New task** para empezar a trabajar.
+
+> ✅ **Deberías ver:** un proyecto "Hackathon S4" abierto, con una carpeta conectada y una caja para escribir tu primera tarea.
+
+---
+
+# PASO 3 · Trae el reto a Cowork
+
+En tu nueva tarea, copia esto 👇
 
 ```text
 Clona este repositorio público y muéstrame su estructura de carpetas:
@@ -52,7 +72,7 @@ Quiero trabajar en la carpeta "starters". Explícame en una frase qué hay en ca
 
 ---
 
-# PASO 3 · Dale tus llaves a Cowork
+# PASO 4 · Dale tus llaves a Cowork
 
 Copia esto y **reemplaza con TUS valores** 👇
 
@@ -70,7 +90,7 @@ Confírmame que quedaron cargadas, sin mostrarlas completas.
 
 ---
 
-# PASO 4 · Elige tu carril y construye
+# PASO 5 · Elige tu carril y construye
 
 Copia **solo el bloque de tu carril** 👇
 
@@ -111,7 +131,7 @@ Luego ayúdame a dispararlo con curl y a comprobar que funcionó.
 
 ---
 
-# PASO 5 · Córrelo y míralo cambiar
+# PASO 6 · Córrelo y míralo cambiar
 
 Copia esto en Cowork 👇
 
@@ -126,7 +146,7 @@ Ahora abre tu **Supabase → Table Editor → cuentas** y refresca.
 
 ---
 
-# PASO 6 · Entrega tu trabajo
+# PASO 7 · Entrega tu trabajo
 
 Copia esto en Cowork 👇
 
