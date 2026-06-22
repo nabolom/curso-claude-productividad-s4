@@ -8,6 +8,8 @@ Construye un agente que **ejecuta, se verifica, recuerda y se dispara solo**, or
 
 > ### 👉 ¿Eres principiante? **Empieza por [EMPIEZA_AQUI.md](EMPIEZA_AQUI.md)** — una guía paso a paso sin tecnicismos.
 
+> ### 🤖 ¿Vas a usar **Cowork**? Sigue **[COWORK_PASO_A_PASO.md](COWORK_PASO_A_PASO.md)** — construye el agente dirigiendo a Cowork, sin teclear código.
+
 ---
 
 ## Los 4 Loops
