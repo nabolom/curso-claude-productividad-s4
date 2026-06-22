@@ -6,6 +6,9 @@ Construye un agente que **ejecuta, se verifica, recuerda y se dispara solo**, or
 > El `estado.json` local de antes evoluciona a una **base de datos en la nube**. Tu agente deja de vivir en tu laptop.
 
 
+
+> ### 🚀 **ALUMNOS, EMPIECEN AQUÍ → [GUIA_ALUMNO_COWORK.md](GUIA_ALUMNO_COWORK.md)** — prompts listos para copiar y pegar en Cowork, paso a paso.
+
 > ### 👉 ¿Eres principiante? **Empieza por [EMPIEZA_AQUI.md](EMPIEZA_AQUI.md)** — una guía paso a paso sin tecnicismos.
 
 > ### 🤖 ¿Vas a usar **Cowork**? Sigue **[COWORK_PASO_A_PASO.md](COWORK_PASO_A_PASO.md)** — construye el agente dirigiendo a Cowork, sin teclear código.
