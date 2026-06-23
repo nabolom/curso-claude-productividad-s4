@@ -22,10 +22,26 @@
 |---|---|---|---|
 | 💻 | **Claude Cowork** (app de escritorio) | Ya lo pagas (Pro/Max/Team) | App de Claude Desktop |
 | 🗄️ | **Supabase** (URL + key) | **Gratis** | [supabase.com](https://supabase.com) → *New project* → *Settings* → *API* |
+| 🐙 | **Cuenta de GitHub** | **Gratis** | [github.com](https://github.com) → *Sign up* (lo usarás al final para entregar) |
 
 > 🟢 **¿Notas qué falta?** No hay "llave de OpenRouter". No la necesitas: el cerebro es Cowork.
 >
 > ⏱️ Crear el proyecto de Supabase tarda ~2 min en ponerse "verde". Hazlo primero.
+
+---
+
+# PASO 0 · Crea tu cuenta de GitHub (si aún no tienes)
+
+> GitHub es donde, al final, **entregarás tu agente** (Paso 7). Crear la cuenta toma 2 minutos y es gratis. Si ya tienes cuenta, salta al Paso 1.
+
+1. Entra a **[github.com](https://github.com)** y haz clic en **Sign up**.
+2. Escribe tu **correo**, una **contraseña** y un **nombre de usuario** (ej. `leonruiz` — será parte del link de tu entregable: `github.com/tu-usuario/...`).
+3. Verifica tu correo (te llega un código).
+4. Elige el plan **Free** (gratis) cuando te pregunte.
+
+> ✅ **Deberías ver:** tu panel de GitHub con el mensaje *"Welcome"*. Anota tu **usuario** y **contraseña** — los necesitarás en el último paso.
+>
+> 💡 **Tip:** si Cowork te pide permiso para subir a GitHub más adelante, te guiará para conectarte. Tener la cuenta lista de antemano evita atorones.
 
 ---
 

@@ -1,0 +1,17 @@
+flowchart LR
+    A["0 - Crea tu cuenta<br/>de GitHub"] --> B["1 - Prepara tu base<br/>en Supabase"]
+    B --> C["2 - Abre Claude Cowork<br/>Start a Project"]
+    C --> D["3 - Clona el repo<br/>del reto"]
+    D --> E["4 - Conecta tu<br/>memoria (Supabase)"]
+    E --> F["5 - Elige tu carril<br/>y construye"]
+    F --> G["6 - Cowork ejecuta<br/>la tabla cambia"]
+    G --> H["7 - Entrega en<br/>GitHub"]
+
+    subgraph CEREBRO ["Cowork es el cerebro - sin costo de API"]
+        F
+        G
+    end
+
+    style A fill:#380c60,color:#ffffff
+    style H fill:#009a4a,color:#ffffff
+    style CEREBRO fill:#d9eaff,stroke:#380c60,color:#380c60
