@@ -1,50 +1,46 @@
 # 🟢 Carril 1 · Fundamentos — Guion de prompts para Cowork
 
-> **Esta es la ruta SIN CÓDIGO (recomendada).** Tú no programas: **Cowork es tu agente**. Copias estos prompts uno por uno y Cowork lee tu Supabase, redacta los mensajes y guarda los resultados.
+> **Esta es la ruta SIN CÓDIGO (recomendada).** Tú no programas: **Cowork es tu agente**. Copias estos prompts uno por uno; Cowork decide, redacta y te entrega **comandos SQL listos**, y tú los pegas en el SQL Editor de Supabase.
 >
-> Si prefieres ver/editar el código tú mismo, mira `agente.js` (versión avanzada con OpenRouter).
+> Si prefieres ver/editar el código tú mismo, mira `agente.js` (versión avanzada con OpenRouter, que corre en TU terminal).
 
-**Lo que vas a lograr:** Cowork lee tus cuentas → decide cuáles llevan +30 días sin contacto → redacta un mensaje de reactivación → escribe el resultado de vuelta en tu Supabase.
+**Lo que vas a lograr:** le das a Cowork la foto de tus cuentas → Cowork decide cuáles llevan +30 días sin contacto → redacta un mensaje de reactivación → te devuelve los `UPDATE` que tú aplicas en Supabase.
 
-**Antes de empezar necesitas:** tu **propia** base de Supabase ya creada (con `schema.sql` y `seed.sql` cargados) y tus dos datos: `SUPABASE_URL` y `SUPABASE_KEY`. Si aún no la tienes, ve a `GUIA_ALUMNO_COWORK.md` (Paso 1).
+> ⚠️ **Importante (el error #1):** Cowork ejecuta código en un entorno **sin internet**, así que **no se conecta solo a tu Supabase**. El patrón correcto es: **tú le pasas los datos** y **él te devuelve los comandos SQL** para que tú los pegues. Tú eres el puente. Sigue siendo un agente real: el cerebro que decide es Cowork.
+
+**Antes de empezar necesitas:** tu **propia** base de Supabase ya creada (con `schema.sql` y `seed.sql` cargados). Si aún no la tienes, ve a `GUIA_ALUMNO_COWORK.md` (Paso 1).
 
 ---
 
-## Prompt 1 · Conecta tu memoria
+## Prompt 1 · Pásale la foto de tu cartera
+
+Primero, en **Supabase → SQL Editor → New query**, corre:
+```sql
+select id, empresa, contacto, dias_sin_contacto, estatus_agente
+from cuentas
+order by dias_sin_contacto desc;
+```
+Copia la tabla de resultados y pégasela a Cowork:
 
 ```text
-Voy a construir un agente de reactivación de cuentas y TÚ vas a operarlo.
-Guarda estos dos datos como variables de entorno de esta sesión y NUNCA los subas a GitHub:
+Voy a construir un agente de reactivación de cuentas y TÚ vas a operarlo (eres el cerebro).
+Esta es mi tabla "cuentas" copiada de Supabase:
 
-SUPABASE_URL = https://........supabase.co   (la mía)
-SUPABASE_KEY = eyJ........                    (mi service_role key)
+[PEGA AQUÍ LA TABLA DE RESULTADOS]
 
-Confírmame que quedaron cargados, sin mostrarlos completos.
+Guárdala como el estado actual de mis clientes y confírmame cuántas cuentas hay en total.
 ```
 
-✅ **Deberías ver:** Cowork confirma que los datos están listos.
+✅ **Deberías ver:** Cowork confirma que recibió 7 empresas (Grupo Meridian, Logística Aurora, etc.).
 
 ---
 
-## Prompt 2 · Lee la cartera
+## Prompt 2 · Decide a quién reactivar (la regla de los 30 días)
 
 ```text
-Conéctate a mi Supabase y muéstrame en una tabla todas las filas de "cuentas":
-nombre de empresa, contacto, estatus_agente y la fecha de ultimo_contacto.
-Dime cuántas hay en total.
-```
-
-✅ **Deberías ver:** 7 empresas (Grupo Meridian, Logística Aurora, etc.) con sus fechas.
-
----
-
-## Prompt 3 · Decide a quién reactivar (la regla de los 30 días)
-
-```text
-Calcula cuántos días han pasado desde el ultimo_contacto de cada cuenta (hoy es la fecha actual).
-Sepáralas en dos listas:
+Con esas cuentas, sepáralas en dos listas:
 - "REACTIVAR": las que llevan MÁS de 30 días sin contacto y tienen estatus_agente = 'pendiente'.
-- "OMITIR": las recientes (menos de 30 días).
+- "OMITIR": las recientes (30 días o menos).
 Muéstrame ambas listas y explícame por qué cada cuenta cayó en su grupo.
 ```
 
@@ -52,44 +48,49 @@ Muéstrame ambas listas y explícame por qué cada cuenta cayó en su grupo.
 
 ---
 
-## Prompt 4 · Redacta los mensajes
+## Prompt 3 · Redacta los mensajes
 
 ```text
 Para cada cuenta de la lista REACTIVAR, redacta un mensaje de reactivación corto (máx 90 palabras),
 cálido y personalizado: usa el nombre del contacto y de la empresa, y menciona que hace tiempo no hablamos.
 Nada de frases acartonadas tipo "estimado cliente" o "lamentamos profundamente".
-Muéstrame los 4 mensajes ANTES de guardarlos para que los apruebe.
+Muéstrame los 4 mensajes en una tabla para revisarlos.
 ```
 
 ✅ **Deberías ver:** 4 mensajes distintos, cada uno con el nombre correcto.
 
 ---
 
-## Prompt 5 · Guarda el resultado en tu memoria
+## Prompt 4 · Genera los comandos SQL para guardar
 
 ```text
-Ahora escribe en mi Supabase: para cada cuenta de REACTIVAR, guarda el mensaje en la columna
-"mensaje_generado" y cambia su "estatus_agente" a 'contactado'.
-Las cuentas de OMITIR déjalas igual.
-Cuando termines, vuelve a leer la tabla y muéstrame qué filas cambiaron.
+Ahora genérame los comandos SQL UPDATE (uno por cada cuenta de REACTIVAR) que:
+- guarden el mensaje en la columna "mensaje_generado",
+- cambien "estatus_agente" a 'contactado'.
+Las cuentas de OMITIR no se tocan.
+Dámelos en UN solo bloque de código listo para copiar y pegar en el SQL Editor de Supabase.
 ```
 
-✅ **Deberías ver:** las 4 cuentas ahora en `contactado` con su mensaje. Las 3 recientes intactas.
+✅ **Deberías ver:** un bloque con 4 `UPDATE cuentas SET ... WHERE id = ...;`
 
 ---
 
-## Prompt 6 · Compruébalo con tus propios ojos
+## Prompt 5 · Aplica los cambios en Supabase
 
-Abre tu **Supabase → Table Editor → cuentas** y refresca la página.
+1. Copia el bloque de `UPDATE` que te dio Cowork.
+2. Ve a **Supabase → SQL Editor → New query**, pégalo y dale **Run**.
+3. Abre **Table Editor → cuentas** y refresca.
 
-✅ **Deberías ver:** exactamente lo mismo que te dijo Cowork. **Tu agente decidió y actuó solo.**
+✅ **Deberías ver:** las 4 cuentas ahora en `contactado` con su mensaje. Las 3 recientes intactas.
+
+> 💡 Si un `UPDATE` falla, cópiale el error a Cowork: *"Me salió esto al correr tu SQL: [error]. Corrígelo."*
 
 ---
 
 ## 🏁 Terminaste el Carril 1 si...
-- [ ] Cowork leyó tu Supabase real.
-- [ ] Decidió por su cuenta cuáles reactivar (regla de 30 días).
+- [ ] Le pasaste la foto de tu base a Cowork.
+- [ ] Cowork decidió por su cuenta cuáles reactivar (regla de 30 días).
 - [ ] Redactó 4 mensajes personalizados.
-- [ ] Escribió los resultados de vuelta y la tabla cambió.
+- [ ] Te dio los `UPDATE`, los aplicaste y la tabla cambió.
 
 ➡️ **¿Te sobró tiempo?** Sube al **Carril 2** (que Cowork se verifique a sí mismo): abre `../carril2_verificacion/PROMPTS_COWORK.md`.
