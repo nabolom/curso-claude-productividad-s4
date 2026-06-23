@@ -3,3 +3,6 @@ node_modules/
 service_role.jwt
 .env
 tests/
+
+# Claves de solucion (solo mentor, no publicar)
+starters/**/SOLUCION.md
