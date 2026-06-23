@@ -1,0 +1,16 @@
+SIMULACIÓN · Cowork como cerebro (Carril 1+2, sin OpenRouter en la sesión real)
+──────────────────────────────────────────────────────────
+[Memoria] 7 cuentas · REACTIVAR=4 · OMITIR=3
+   reactivar: Logística Aurora (56d)
+   reactivar: Constructora Vega (53d)
+   reactivar: Grupo Meridian (49d)
+   reactivar: Textiles del Norte (44d)
+   omitir:    Salud Integral MX (11d)
+   omitir:    Cafetalera del Sur (8d)
+   omitir:    FinTech Brava (5d)
+   ✓ Logística Aurora guardado (1 intento(s), verificado)
+   ✓ Constructora Vega guardado (1 intento(s), verificado)
+   ✓ Grupo Meridian guardado (1 intento(s), verificado)
+   ✓ Textiles del Norte guardado (1 intento(s), verificado)
+──────────────────────────────────────────────────────────
+RESUMEN · contactadas=4/4 · mensajes corregidos por autoverificación=0 · costo en sesión real con Cowork=$0
