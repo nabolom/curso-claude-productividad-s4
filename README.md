@@ -47,6 +47,7 @@ El equipo comercial tiene una cartera de cuentas en **Supabase**. Construye un a
 | 🟢 **1 · Fundamentos** | 1 + 3 | Primer contacto: leer, redactar, guardar |
 | 🟡 **2 · Verificación** | 1 + 2 + 3 | El agente se controla a sí mismo |
 | 🔴 **3 · Autónomo** | 1 + 2 + 3 + 4 | El sistema corre solo con `/schedule` |
+| 🟣 **C · Experto (n8n)** | 1 + 3 + 4 en la nube | ⭐ Reto estrella: el agente vive en n8n y lo dispara un webhook — [RUTA_C_N8N.md](RUTA_C_N8N.md) |
 
 Cada carril tiene su **guion de prompts copy-paste** (sin código) en `starters/`:
 
@@ -77,7 +78,8 @@ curso-claude-productividad-s4/
 │   ├── carril1_fundamentos/        ← PROMPTS_COWORK.md (sin código) + agente.js (bonus)
 │   ├── carril2_verificacion/       ← PROMPTS_COWORK.md (sin código) + agente.js (bonus)
 │   └── carril3_autonomo/           ← PROMPTS_COWORK.md (/schedule) + README.md (n8n, avanzado)
-├── integrations/n8n/              ← workflow importable (trigger avanzado en la nube)
+├── RUTA_C_N8N.md                  ← 🟣 guía del carril experto (n8n en la nube)
+├── integrations/n8n/              ← RUTA_C_workflow_alumno.json (importable, sin llaves)
 └── local_supabase/                ← clon local de Supabase (para probar sin cuenta)
 ```
 

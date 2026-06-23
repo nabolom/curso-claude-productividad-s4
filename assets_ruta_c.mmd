@@ -1,0 +1,23 @@
+flowchart LR
+    EXT["Mundo real<br/>(formulario / curl /<br/>cron en la nube)"] -->|dispara| WH["1 - Webhook<br/>(Loop 4)"]
+    WH --> CFG["2 - Tus 3 llaves<br/>(Supabase + OpenRouter)"]
+    CFG --> READ["3 - Leer cartera<br/>Supabase (Loop 3)"]
+    READ --> SPLIT["4 - Separar<br/>cuenta por cuenta"]
+    SPLIT --> IF["5 - Filtro<br/>+30 dias (Loop 3)"]
+    IF -->|si| GEN["6 - Claude redacta<br/>OpenRouter (Loop 1)"]
+    GEN --> SAVE["7 - Guardar en<br/>Supabase (Loop 3)"]
+    IF -->|reciente| SKIP["se omite"]
+
+    subgraph NUBE ["Vive en n8n - corre aunque cierres tu laptop"]
+        WH
+        CFG
+        READ
+        SPLIT
+        IF
+        GEN
+        SAVE
+    end
+
+    style EXT fill:#380c60,color:#ffffff
+    style SAVE fill:#009a4a,color:#ffffff
+    style NUBE fill:#d9eaff,stroke:#380c60,color:#380c60

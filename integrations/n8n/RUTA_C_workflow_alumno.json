@@ -1,0 +1,158 @@
+{
+  "name": "Ruta C - Agente Reactivacion en la nube (Hackathon S4)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reactivacion",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000001",
+      "name": "1. Webhook (el disparador - Loop 4)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 320],
+      "webhookId": "hackathon-s4-reactivacion"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cfg-1",
+              "name": "SUPABASE_URL",
+              "value": "PEGA_AQUI_TU_PROJECT_URL",
+              "type": "string"
+            },
+            {
+              "id": "cfg-2",
+              "name": "SUPABASE_KEY",
+              "value": "PEGA_AQUI_TU_SERVICE_ROLE_KEY",
+              "type": "string"
+            },
+            {
+              "id": "cfg-3",
+              "name": "OPENROUTER_API_KEY",
+              "value": "PEGA_AQUI_TU_OPENROUTER_KEY",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000002",
+      "name": "2. CONFIGURA AQUI tus 3 llaves",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [440, 320]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.SUPABASE_URL }}/rest/v1/cuentas?estatus_agente=eq.pendiente&select=*&order=ultimo_contacto.asc",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.SUPABASE_KEY }}" },
+            { "name": "Authorization", "value": "=Bearer {{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.SUPABASE_KEY }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000003",
+      "name": "3. Supabase: leer cartera (Loop 3 - memoria)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 320]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000004",
+      "name": "4. Separar cuenta por cuenta",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [880, 320]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "id": "cond-30dias",
+              "leftValue": "={{ (new Date() - new Date($json.ultimo_contacto)) / 86400000 }}",
+              "rightValue": 30,
+              "operator": { "type": "number", "operation": "gt" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000005",
+      "name": "5. Filtro: +30 dias sin contacto (Loop 3)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1100, 320]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.OPENROUTER_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"anthropic/claude-sonnet-4.5\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Eres ejecutivo de cuenta. Escribe un mensaje de reactivacion breve (max 90 palabras), calido y personalizado, con un siguiente paso claro. Devuelve SOLO el cuerpo del mensaje, sin asunto ni firma.\"},\n    {\"role\": \"user\", \"content\": \"Empresa: {{ $json.empresa }}, Contacto: {{ $json.contacto }}, Etapa: {{ $json.etapa }}. Redacta el mensaje de reactivacion.\"}\n  ]\n}",
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000006",
+      "name": "6. Claude redacta (Loop 1 - ejecucion)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 220]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.SUPABASE_URL }}/rest/v1/cuentas?id=eq.{{ $('5. Filtro: +30 dias sin contacto (Loop 3)').item.json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.SUPABASE_KEY }}" },
+            { "name": "Authorization", "value": "=Bearer {{ $('2. CONFIGURA AQUI tus 3 llaves').item.json.SUPABASE_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"mensaje_generado\": {{ JSON.stringify($json.choices[0].message.content) }},\n  \"estatus_agente\": \"contactado\",\n  \"verificado\": true\n}",
+        "options": {}
+      },
+      "id": "11110000-0000-4000-8000-000000000007",
+      "name": "7. Supabase: guardar resultado (Loop 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1540, 220]
+    }
+  ],
+  "connections": {
+    "1. Webhook (el disparador - Loop 4)": { "main": [[{ "node": "2. CONFIGURA AQUI tus 3 llaves", "type": "main", "index": 0 }]] },
+    "2. CONFIGURA AQUI tus 3 llaves": { "main": [[{ "node": "3. Supabase: leer cartera (Loop 3 - memoria)", "type": "main", "index": 0 }]] },
+    "3. Supabase: leer cartera (Loop 3 - memoria)": { "main": [[{ "node": "4. Separar cuenta por cuenta", "type": "main", "index": 0 }]] },
+    "4. Separar cuenta por cuenta": { "main": [[{ "node": "5. Filtro: +30 dias sin contacto (Loop 3)", "type": "main", "index": 0 }]] },
+    "5. Filtro: +30 dias sin contacto (Loop 3)": { "main": [[{ "node": "6. Claude redacta (Loop 1 - ejecucion)", "type": "main", "index": 0 }]] },
+    "6. Claude redacta (Loop 1 - ejecucion)": { "main": [[{ "node": "7. Supabase: guardar resultado (Loop 3)", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}
