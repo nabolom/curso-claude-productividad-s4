@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 /**
  * CARRIL 2 · VERIFICACIÓN  (Loop 1 + Loop 2 + Loop 3)
+ * =============================================================================
+ * ⚠️ VERSIÓN AVANZADA / EN CÓDIGO (= el BONUS de OpenRouter).
+ * La ruta recomendada del reto es SIN código: usa PROMPTS_COWORK.md, donde
+ * Cowork se verifica a sí mismo y NO necesitas OpenRouter.
+ * Este archivo muestra el patrón PRO de routing de costos: un modelo barato
+ * (Haiku) verifica el trabajo del modelo potente. Requiere OPENROUTER_API_KEY.
+ * =============================================================================
  * -----------------------------------------------------------------------------
  * Meta: como el Carril 1, PERO el agente VERIFICA su propio mensaje antes de
  *       guardarlo. Si el verificador lo rechaza, el worker reintenta con feedback.

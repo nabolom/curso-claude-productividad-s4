@@ -1,5 +1,7 @@
 # Carril 1 · Solución de los TODOs (solo para el mentor)
 
+> Nota: esto resuelve la **versión en código** (`agente.js`), que es la ruta avanzada/bonus. La ruta recomendada del reto es sin código (`PROMPTS_COWORK.md`).
+
 ```js
 // TODO (1)
 const url = `${SB_URL}/rest/v1/cuentas?estatus_agente=eq.pendiente&select=*&order=ultimo_contacto.asc`;

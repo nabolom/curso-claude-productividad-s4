@@ -94,7 +94,7 @@ Cada equipo elige su carril al inicio. **Todos parten de las mismas plantillas d
 2. **Eligen carril al inicio** — pueden subir de carril si terminan antes.
 3. **El entregable vive en GitHub** — un repo (puede ser privado) con el código/config + un `README` que explique qué loops implementaron.
 4. **Parten de las plantillas de arranque** que el mentor provee (no arrancan de cero).
-5. **Las llaves de API son del mentor/curso** para el demo; cada equipo usa las suyas o las compartidas con límite de gasto bajo.
+5. **Cada equipo usa SU PROPIA base de Supabase** (Modelo 2): crean su proyecto gratis con `schema.sql` + `seed.sql`, o usan el clon local. El cerebro es **Cowork** (ya pagado); OpenRouter solo se usa en el bonus avanzado con llave propia y límite de gasto bajo.
 6. **Demo final de 2-3 min** por equipo seleccionado: "¿qué loops lograron y qué vieron cambiar?".
 
 ---
@@ -135,5 +135,5 @@ Para demostrar en vivo durante la teoría y para que los equipos clonen como bas
 
 ## 10. Decisiones de diseño abiertas (para validar con León tras ver la referencia)
 
-- ¿La tabla Supabase la creo en un proyecto de demo real o dejo el `schema.sql` para que cada quien cree el suyo? (Propongo: ambas — un proyecto demo del mentor + el SQL para que repliquen).
+- Supabase: el mentor tiene su **propio** proyecto solo para la demo en vivo; cada alumno crea el **suyo** con `schema.sql` + `seed.sql` (Modelo 2). No se comparte una base común para evitar que se pisen los datos.
 - ¿El repo de referencia lo dejo público para que clonen fácil, o privado y compartes por invitación?

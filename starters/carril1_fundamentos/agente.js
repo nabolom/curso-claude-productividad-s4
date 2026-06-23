@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 /**
  * CARRIL 1 · FUNDAMENTOS  (Loop 1 + Loop 3)
+ * =============================================================================
+ * ⚠️ VERSIÓN AVANZADA / EN CÓDIGO (opcional).
+ * La ruta recomendada del reto es SIN código: usa PROMPTS_COWORK.md de esta
+ * carpeta, donde Cowork ES el agente y NO necesitas OpenRouter.
+ * Este archivo .js es para quien quiera ver/editar el código o hacer el
+ * bonus de routing con OpenRouter. Requiere una OPENROUTER_API_KEY de pago.
+ * =============================================================================
  * -----------------------------------------------------------------------------
  * Meta: un agente que LEE cuentas desde Supabase, GENERA un mensaje con Claude,
  *       y ESCRIBE el resultado de vuelta en Supabase.

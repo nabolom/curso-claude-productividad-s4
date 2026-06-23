@@ -30,7 +30,7 @@ Piensa en esto como los ingredientes de una receta. Necesitas 3 cosas:
 |---|---|---|
 | **Node** | El "motor" que ejecuta el programa en tu compu | Lo instalas una vez (ver Paso 1) |
 | **Llave de OpenRouter** | Una contraseña para usar a Claude | La sacas en openrouter.ai |
-| **Datos en Supabase** | La base de datos con los clientes | Tu mentor te dará el acceso O usas el modo local |
+| **Datos en Supabase** | Tu propia base de datos con los clientes | La creas tú gratis (Paso 4) O usas el modo local |
 
 > 💡 **No te preocupes si esto suena a chino.** Cada paso de abajo te dice exactamente qué hacer.
 
@@ -87,8 +87,10 @@ Esta es la "contraseña" que deja que tu agente hable con Claude.
 
 Aquí tienes **dos caminos**. Elige UNO:
 
-### 🅰️ Camino fácil: tu mentor te da el acceso
-Tu mentor te pasará dos datos: una **URL** (`https://algo.supabase.co`) y una **llave**. Solo cópialos y sigue al Paso 5.
+### 🅰️ Camino recomendado: crea TU propia Supabase (gratis)
+Entra a [supabase.com](https://supabase.com) → **New project** (nombre: `mi-agente-s4`). Cuando esté verde, ve a **SQL Editor** y corre primero `reference_solution/supabase/schema.sql` y luego `reference_solution/supabase/seed.sql`. Tus dos datos (**Project URL** y **service_role key**) están en **Settings → API**. Cópialos y sigue al Paso 5.
+
+> Cada quien usa **su propia** base (Modelo 2): así nadie pisa los datos de nadie.
 
 ### 🅱️ Camino "sin cuenta": modo local
 Si no tienes acceso a Supabase, hay un **clon local** que funciona igual.
@@ -173,7 +175,7 @@ No todos tienen que hacer lo mismo. Elige según cómo te sientas:
 
 ## 🏁 ¿Terminaste?
 
-1. **Sube tu trabajo a tu propio GitHub** (tu mentor te enseña cómo) o muéstralo en pantalla.
+1. **Sube tu trabajo a tu propio GitHub** (Cowork puede hacerlo por ti) o muéstralo en pantalla.
 2. Prepárate para responder en la demo:
    - ¿Qué carril elegiste?
    - ¿Qué fue lo más difícil?

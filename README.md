@@ -48,7 +48,15 @@ El equipo comercial tiene una cartera de cuentas en **Supabase**. Construye un a
 | 🟡 **2 · Verificación** | 1 + 2 + 3 | El agente se controla a sí mismo |
 | 🔴 **3 · Autónomo** | 1 + 2 + 3 + 4 | El sistema corre solo con `/schedule` |
 
-Prompts y plantillas en `starters/` — no empiezas de cero.
+Cada carril tiene su **guion de prompts copy-paste** (sin código) en `starters/`:
+
+| Carril | Guion de prompts (sin código) | Versión en código (bonus) |
+|---|---|---|
+| 🟢 1 | `starters/carril1_fundamentos/PROMPTS_COWORK.md` | `agente.js` |
+| 🟡 2 | `starters/carril2_verificacion/PROMPTS_COWORK.md` | `agente.js` |
+| 🔴 3 | `starters/carril3_autonomo/PROMPTS_COWORK.md` | `README.md` (webhook/n8n) |
+
+> ✅ Ambos caminos (Cowork sin costo y la versión en código con OpenRouter) están **probados de punta a punta** contra una Supabase real.
 
 ---
 
@@ -66,6 +74,9 @@ curso-claude-productividad-s4/
 │   ├── supabase/seed.sql          ← carga los datos de ejemplo
 │   └── loop4_trigger/webhook_server.js
 ├── starters/                      ← plantillas por carril
+│   ├── carril1_fundamentos/        ← PROMPTS_COWORK.md (sin código) + agente.js (bonus)
+│   ├── carril2_verificacion/       ← PROMPTS_COWORK.md (sin código) + agente.js (bonus)
+│   └── carril3_autonomo/           ← PROMPTS_COWORK.md (/schedule) + README.md (n8n, avanzado)
 ├── integrations/n8n/              ← workflow importable (trigger avanzado en la nube)
 └── local_supabase/                ← clon local de Supabase (para probar sin cuenta)
 ```

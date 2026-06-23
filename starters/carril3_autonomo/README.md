@@ -1,12 +1,16 @@
 # Carril 3 · AUTÓNOMO (Loop 1 + 2 + 3 + 4)
 
+> ⚠️ **¿Ruta SIN código (recomendada)?** Usa `PROMPTS_COWORK.md` de esta carpeta: el agente se dispara solo con **`/schedule`** de Cowork. Este README es la **ruta avanzada** (webhook propio / n8n) para quien quiera un disparo 100% en la nube.
+
 **Meta:** tu agente del Carril 2 ya ejecuta, verifica y recuerda. Ahora haz que **se dispare solo**, sin que tú lo corras en la terminal.
 
-Tienes dos rutas para el Loop 4. Elige una:
+> 🔑 **Cada quien usa SU PROPIA Supabase** (Modelo 2). No hay una URL/base compartida del mentor: tú creaste la tuya con `schema.sql` + `seed.sql`.
+
+Tienes dos rutas avanzadas para el Loop 4. Elige una:
 
 ---
 
-## Ruta A — Webhook (recomendada, no requiere cuenta extra)
+## Ruta A — Webhook local (no requiere cuenta extra)
 
 1. Copia tu `agente.js` del Carril 2 a esta carpeta.
 2. Usa el archivo `webhook.js` de esta carpeta (ya viene listo). Levanta el servidor:

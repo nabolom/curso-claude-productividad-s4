@@ -1,5 +1,7 @@
 # Carril 2 · Solución de los TODOs (solo mentor)
 
+> Nota: esto resuelve la **versión en código** (`agente.js`) = el bonus de OpenRouter. La ruta recomendada es sin código (`PROMPTS_COWORK.md`).
+
 ```js
 // TODO (1) — grader determinista
 function graderCodigo(texto) {
